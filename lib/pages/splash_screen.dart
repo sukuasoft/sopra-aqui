@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sopra_aqui/helpers/app_helper.dart';
 import 'package:sopra_aqui/pages/devices.dart';
+import 'package:sopra_aqui/providers/main.dart';
 import 'package:sopra_aqui/themes/colors.dart';
 
 class SplashScreenPage extends StatelessWidget {
@@ -9,7 +12,10 @@ class SplashScreenPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 5), (){
+    Timer(Duration(seconds: 5), () async{
+      await AppHelper.requestAllPermissions();
+      await context.read<MainProvider>().fetchDevices();
+
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context){
         return DevicesPage();
       }));

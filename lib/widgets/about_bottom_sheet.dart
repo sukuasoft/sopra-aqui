@@ -46,13 +46,14 @@ class AboutBottomSheet extends StatelessWidget {
         Text('O Sopra Aqui é um aplicativo inovador desenvolvido para auxiliar no monitoramento dos níveis de álcool no organismo de forma rápida e intuitiva. Através da conexão com um bafômetro, o aplicativo mede a taxa de álcool no sangue (BAC) e classifica os resultados em três níveis: Seguro, Alerta e Perigoso.', 
         textAlign: TextAlign.justify,
         style: TextStyle(
-        
+        fontSize: 12
         ),),
 
         SizedBox(height: 20,), 
 
          Text('Desenvolvido por', style: TextStyle(
           fontWeight: FontWeight.bold, 
+          fontSize: 12
         ),), 
         SizedBox(height: 15,), 
         ],),),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sopra_aqui/models/device.dart';
+import 'package:provider/provider.dart';
+import 'package:sopra_aqui/providers/main.dart';
 import 'package:sopra_aqui/themes/colors.dart';
 import 'package:sopra_aqui/widgets/app_layout.dart';
 import 'package:sopra_aqui/widgets/device_button.dart';
@@ -7,17 +8,14 @@ import 'package:sopra_aqui/widgets/device_button.dart';
 
 class DevicesPage extends StatelessWidget {
 
-  DevicesPage({super.key});
+  const DevicesPage({super.key});
   
-  final List<DeviceModel> devices = [
-
-    DeviceModel(address: '', name: 'DEVICE 1'),
-    DeviceModel(address: '', name: 'DEVICE 2')
-  ];
-
   @override
   Widget build(BuildContext context) {
     return AppLayout(
+      actionRefreshButton: () async{
+        await context.read<MainProvider>().fetchDevices();
+      },
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,17 +23,26 @@ class DevicesPage extends StatelessWidget {
         Divider(
           color: AppColors.gray,
         ),
-        SizedBox(
-          height: 20,
-        ),
-        Expanded(
-            child: ListView.separated(
+        SizedBox(height: 10,),
+
+        Consumer<MainProvider>(builder: (context, provider, child) {
+
+          if (provider.devices.isEmpty) {
+return Text('* Sem nenhum dispositivo',
+          style: TextStyle(
+            color: AppColors.grayDark, 
+            fontSize: 10
+          ),);
+          }
+       return   Expanded(
+            child: 
+           ListView.separated(
                 separatorBuilder: (context, index) => SizedBox(
                       height: 15,
                     ),
-                itemCount: devices.length,
+                itemCount: provider.devices.length,
                 itemBuilder: (context, index) =>
-                    DeviceButton(device: devices[index])))
+                    DeviceButton(device: provider.devices[index])),);})
       ],
     ));
   }
