@@ -5,9 +5,7 @@ import 'package:sopra_aqui/models/device.dart';
 
 class DeviceRepository {
   static Future<List<DeviceModel>> getDevices() async {
-    List<DeviceModel> devices = [
-      DeviceModel(address: '123', name: 'Device Sukua')
-    ];
+    List<DeviceModel> devices = [];
 
     try {
       List<BluetoothDevice> btDevices =

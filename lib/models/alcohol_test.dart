@@ -1,5 +1,6 @@
 
 enum AlcoholTestResult {
+  none,
   seguro,alerta, perigoso, 
 }
 
