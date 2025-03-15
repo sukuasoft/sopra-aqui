@@ -94,7 +94,7 @@ class MainProvider extends ChangeNotifier {
     if (!connection.isConnected) return false;
 
     _deviceConnected = connection;
-    // _deviceConnected!.connection.input!.listen(listenDevice);
+    _deviceConnected!.connection.input!.listen(listenDevice);
     notifyListeners();
     return true;
   }

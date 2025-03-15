@@ -20,10 +20,10 @@ class DevicePage extends StatelessWidget {
     return PopScope(
         canPop: false,
         onPopInvokedWithResult: (didPop, result) async {
-         if (didPop) return;
+          if (didPop) return;
           context.read<MainProvider>().disconnectDevice();
-            context.read<MainProvider>().testingAlcohol=false;
-      
+          context.read<MainProvider>().testingAlcohol = false;
+
           Navigator.of(context).pop();
         },
         child: AppLayout(
@@ -91,33 +91,42 @@ class DevicePage extends StatelessWidget {
                             SizedBox(
                                 width: double.infinity,
                                 height: double.infinity,
-                                child: CircularProgressIndicator(
-                                    strokeCap: StrokeCap.round,
-                                    strokeWidth: 10,
-                                    backgroundColor: resultTest ==
-                                            AlcoholTestResult.seguro
-                                        ? AppColors.greenLight
-                                        : (resultTest ==
-                                                AlcoholTestResult.alerta
-                                            ? AppColors.yellowLight
-                                            : (resultTest ==
-                                                    AlcoholTestResult.perigoso
-                                                ? AppColors.redLight
-                                                : AppColors.gray)),
-                                    color: resultTest ==
-                                            AlcoholTestResult.seguro
-                                        ? AppColors.green
-                                        : (resultTest ==
-                                                AlcoholTestResult.alerta
-                                            ? AppColors.yellow
-                                            : (resultTest ==
-                                                    AlcoholTestResult.perigoso
-                                                ? AppColors.red
-                                                : AppColors.grayDark)),
-                                    value:
-                                        (deviceConnected.currentTest?.value ??
-                                                0.03) *
-                                            10)),
+                                child: TweenAnimationBuilder<double>(
+                                    tween: Tween(
+                                        begin: 0,
+                                        end: (deviceConnected
+                                                    .currentTest?.value ??
+                                                0) *
+                                            10),
+                                    duration: Duration(milliseconds: 800),
+                                    builder: (context, value, child) {
+                                      return CircularProgressIndicator(
+                                          strokeCap: StrokeCap.round,
+                                          strokeWidth: 10,
+                                          backgroundColor: resultTest ==
+                                                  AlcoholTestResult.seguro
+                                              ? AppColors.greenLight
+                                              : (resultTest ==
+                                                      AlcoholTestResult.alerta
+                                                  ? AppColors.yellowLight
+                                                  : (resultTest ==
+                                                          AlcoholTestResult
+                                                              .perigoso
+                                                      ? AppColors.redLight
+                                                      : AppColors.gray)),
+                                          color: resultTest ==
+                                                  AlcoholTestResult.seguro
+                                              ? AppColors.green
+                                              : (resultTest ==
+                                                      AlcoholTestResult.alerta
+                                                  ? AppColors.yellow
+                                                  : (resultTest ==
+                                                          AlcoholTestResult
+                                                              .perigoso
+                                                      ? AppColors.red
+                                                      : AppColors.grayDark)),
+                                          value: value);
+                                    })),
                             Center(
                               child: Text(deviceConnected.currentTest == null
                                   ? '-'

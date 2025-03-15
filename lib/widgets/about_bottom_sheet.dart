@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sopra_aqui/models/membro.dart';
-import 'package:sopra_aqui/widgets/membro_item.dart';
+//import 'package:sopra_aqui/widgets/membro_item.dart';
 
 class AboutBottomSheet extends StatelessWidget {
   AboutBottomSheet({super.key});

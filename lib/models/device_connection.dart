@@ -21,7 +21,8 @@ class DeviceConnection {
     String value = dados[1];
 
     if (key == 'test') {
-      double valueTest = (int.parse(value) * 0.05 ) / 1000;
+      
+      double valueTest = (double.parse(value) * 0.05 ) / 1000;
 
       final test = AlcoholTest(value: valueTest, date: DateTime.now());
       currentTest = test;

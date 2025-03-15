@@ -22,6 +22,8 @@ class _DeviceButtonState extends State<DeviceButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
+
+        if (_isConnecting) return;
         setState(() {
           _isConnecting = true;
         });
