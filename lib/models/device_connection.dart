@@ -21,7 +21,7 @@ class DeviceConnection {
     String value = dados[1];
 
     if (key == 'test') {
-      double valueTest = double.parse(value);
+      double valueTest = (int.parse(value) * 0.05 ) / 1000;
 
       final test = AlcoholTest(value: valueTest, date: DateTime.now());
       currentTest = test;
@@ -46,12 +46,13 @@ class DeviceConnection {
     try {
       final con = await BluetoothConnection.toAddress(device.address);
 
-      if (connection.isConnected) {
+      if (con.isConnected) {
         isConnected = true;
         connection = con;
         return true;
       }
     } catch (e) {
+      print(e);
       print('Houve um problema!');
     }
 
@@ -60,8 +61,8 @@ class DeviceConnection {
 
   Future<bool> disconnect() async {
     try {
-      await connection.close();
       isConnected = false;
+      await connection.close();
       return true;
     } catch (e) {
       print('Houve um problema!');

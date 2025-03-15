@@ -62,12 +62,17 @@ class MainProvider extends ChangeNotifier {
   }
 
   Future<bool> disconnectDevice() async {
-    if (_deviceConnected == null) return false;
+    bool result = false;
+    try {
+      if (_deviceConnected == null) return result;
 
-    final result = await _deviceConnected!.disconnect();
-    if (!result) return false;
+      result = await _deviceConnected!.disconnect();
+    } catch (e) {
+      print(e);
+    }
+
     notifyListeners();
-    return true;
+    return result;
   }
 
   Future<bool> reconnectDevice() async {
